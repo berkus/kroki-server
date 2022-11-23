@@ -13,6 +13,7 @@ import io.kroki.server.service.Diagramsnet;
 import io.kroki.server.service.Ditaa;
 import io.kroki.server.service.Erd;
 import io.kroki.server.service.Excalidraw;
+import io.kroki.server.service.Gnuplot;
 import io.kroki.server.service.Graphviz;
 import io.kroki.server.service.HealthHandler;
 import io.kroki.server.service.HelloHandler;
@@ -110,6 +111,7 @@ public class Server extends AbstractVerticle {
     registry.register(new Ditaa(vertx), "ditaa");
     registry.register(new Blockdiag(vertx, config), "blockdiag", "seqdiag", "actdiag", "nwdiag", "packetdiag", "rackdiag");
     registry.register(new Umlet(vertx), "umlet");
+    registry.register(new Gnuplot(vertx, config, commander), "gnuplot");
     registry.register(new Graphviz(vertx, config, commander), "graphviz", "dot");
     registry.register(new Erd(vertx, config, commander), "erd");
     registry.register(new Svgbob(vertx, config, commander), "svgbob");

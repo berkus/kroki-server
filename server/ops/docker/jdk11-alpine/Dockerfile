@@ -143,6 +143,11 @@ COPY ops/docker/Cargo.toml .
 RUN SVGBOB_VERSION=`cat Cargo.toml | grep "svgbob_cli =" | sed -r 's/.*"([^"]+)"/\1/'` \
   && cargo install --quiet --target x86_64-unknown-linux-musl --version $SVGBOB_VERSION svgbob_cli
 
+## gnuplot
+FROM alpine:3.16 AS kroki-builder-gnuplot
+
+RUN apk add --no-cache gnuplot
+
 ## yuzutech/kroki
 FROM eclipse-temurin:11.0.16.1_1-jre-alpine
 
@@ -156,6 +161,7 @@ COPY --from=kroki-builder-vega /app/app.bin /usr/bin/vega
 COPY --from=kroki-builder-vega /app/canvas.node /usr/bin/canvas.node
 COPY --from=kroki-builder-wavedrom /app/app.bin /usr/bin/wavedrom
 COPY --from=kroki-builder-bytefield /app/app.bin /usr/bin/bytefield
+COPY --from=kroki-builder-gnuplot /usr/bin/gnuplot /usr/bin/gnuplot
 
 RUN apk add --update --no-cache \
            libjpeg \
@@ -176,6 +182,7 @@ ENV KROKI_VEGA_BIN_PATH=/usr/bin/vega
 ENV KROKI_WAVEDROM_BIN_PATH=/usr/bin/wavedrom
 ENV KROKI_BYTEFIELD_BIN_PATH=/usr/bin/bytefield
 ENV KROKI_PIKCHR_BIN_PATH=/usr/bin/pikchr
+ENV KROKI_GNUPLOT_BIN_PATH=/usr/bin/gnuplot
 ENV JAVA_OPTS="-Dlogback.configurationFile=/etc/kroki/logback.xml -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory"
 
 COPY --chown=kroki:kroki target/kroki-server.jar /usr/local/kroki/kroki-server.jar
