@@ -1,8 +1,12 @@
 # Kroki
 
-Convert plain text diagrams to images !
+Convert plain text diagrams to images!
 
 Kroki provides a unified API with support for BlockDiag (BlockDiag, SeqDiag, ActDiag, NwDiag, PacketDiag, RackDiag), BPMN, Bytefield, C4 (with PlantUML), Ditaa, Erd, Excalidraw, GraphViz, Mermaid, Nomnoml, Pikchr, PlantUML, SvgBob, UMLet, Vega, Vega-Lite, WaveDrom... and more to come!
+
+## NB
+
+This version includes support for gnuplot. Do not expose it to the externets.
 
 ## Getting Started
 

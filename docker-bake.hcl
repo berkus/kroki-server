@@ -3,7 +3,7 @@ variable "TAG" {
 }
 
 group "default" {
-  targets = ["kroki", "kroki-blockdiag", "kroki-mermaid", "kroki-bpmn", "kroki-excalidraw", "kroki-diagramsnet"]
+  targets = ["kroki"]
 }
 
 target "kroki" {
@@ -15,31 +15,5 @@ target "kroki" {
     bytefield = "./bytefield"
   }
   dockerfile = "ops/docker/jdk11-alpine/Dockerfile"
-  tags = ["yuzutech/kroki:${TAG}"]
+  tags = ["berkus/kroki-server:${TAG}"]
 }
-
-target "kroki-blockdiag" {
-  context = "blockdiag"
-  tags = ["yuzutech/kroki-blockdiag:${TAG}"]
-}
-
-target "kroki-mermaid" {
-  context = "mermaid"
-  tags = ["yuzutech/kroki-mermaid:${TAG}"]
-}
-
-target "kroki-bpmn" {
-  context = "bpmn"
-  tags = ["yuzutech/kroki-bpmn:${TAG}"]
-}
-
-target "kroki-excalidraw" {
-  context = "excalidraw"
-  tags = ["yuzutech/kroki-excalidraw:${TAG}"]
-}
-
-target "kroki-diagramsnet" {
-  context = "diagrams.net"
-  tags = ["yuzutech/kroki-diagramsnet:${TAG}"]
-}
-
